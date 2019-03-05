@@ -1,0 +1,28 @@
+#forum-intro {
+  margin-top: 10px;
+}
+.forumselectform input[type="checkbox"] {
+  margin-left: 5px;
+  margin-right: 2px;
+}
+#menuforum {
+  margin-bottom: 5px;
+}
+#wordcloud {
+  margin-top: 20px;
+  border: 1px solid #eee;
+  height: 600px;
+  width: 800px;
+}
+
+#wordcloud svg {
+  background-color: #fcfcfc;
+}
+
+#weight_table {
+  width: 800px;
+}
+
+svg text:hover {
+  opacity: 0.7;
+}
