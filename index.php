@@ -127,7 +127,7 @@ if ($forum !== 0) {
             JiebaAnalyse::init();
             $top_k = 20;
             
-            $stop_words_path = "jieba-php/dict/stop_words.txt";
+            $stop_words_path = $CFG->dirroot."/report/forumkeywords/jieba-php/dict/stop_words.txt";
             $stop_words = fopen($stop_words_path, "r");
             
             JiebaAnalyse::setStopWords($stop_words_path);
