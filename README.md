@@ -2,7 +2,7 @@
 
 ## Usage
 
-The Forum Keywords Report extract keywords from all posts in a Forum activity and generate a word cloud with a table listing the weights of each keyword. It is mainly developed for analysing Chinese, but appeared to also work for English as long as "eng" option is selected for "Allow POS (special)". The POS (part of speech) feature follow "ICTPOS3.0" specification (https://gist.github.com/luw2007/6016931) and only works for Chinese Words.
+The Forum Keywords Report extract keywords from all posts in a Forum activity and generate a word cloud with a table listing the weights of each keyword. It is mainly developed for analysing Chinese but appeared to also work for English. The POS (part of speech) feature follow "ICTPOS3.0" specification (https://gist.github.com/luw2007/6016931) and only works for Chinese Words.
 
 When a keyword in the word cloud is clicked, a new page will pop-up and search the occurrences of it in the forum using the native search feature provided by Moodle.
 

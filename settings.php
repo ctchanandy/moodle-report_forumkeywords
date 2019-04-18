@@ -25,9 +25,9 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    $settings->add(new admin_setting_configtext('report_forumkeywords', get_string('topknum', 'report_forumkeywords'),
-                   get_string('configtopknum', 'report_forumkeywords'), 20, PARAM_INT));
+    $settings->add(new admin_setting_configtext('report_forumkeywords/topknum', get_string('topknum', 'report_forumkeywords'),
+                   get_string('configtopknum', 'report_forumkeywords'), 20, PARAM_INT, 6));
     
-    $settings->add(new admin_setting_configtext('report_forumkeywords', get_string('minwords', 'report_forumkeywords'),
-                   get_string('configminwords', 'report_forumkeywords'), 50, PARAM_INT));
+    $settings->add(new admin_setting_configtext('report_forumkeywords/minwords', get_string('minwords', 'report_forumkeywords'),
+                   get_string('configminwords', 'report_forumkeywords'), 50, PARAM_INT, 6));
 }

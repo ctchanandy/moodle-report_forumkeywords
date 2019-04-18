@@ -133,7 +133,7 @@ function report_forumkeywords_get_forum_posts($fid) {
     global $DB;
 
     $forum_messages = $DB->get_records_sql('
-        SELECT p.id, p.userid, p.message 
+        SELECT p.id, p.userid, p.message, p.messageformat 
         FROM {forum_posts} p 
         WHERE p.discussion IN 
             (SELECT d.id FROM {forum_discussions} d WHERE d.forum = ?) AND p.deleted = 0

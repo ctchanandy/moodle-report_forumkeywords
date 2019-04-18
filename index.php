@@ -21,7 +21,6 @@
  * @copyright 2018 Andy Chan <ctchan.andy@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-ini_set('memory_limit', '1024M');
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
@@ -75,14 +74,20 @@ $forum_intro = '';
 // Get messages of forum posts and process them
 $params = array();
 if ($forum !== 0) {
+    if (!$cm = get_coursemodule_from_instance('forum', $forum, $id)) {
+        print_error('invalidcoursemodule');
+    }
+
     // Trigger a report viewed event.
     $event = \report_forumkeywords\event\report_viewed::create(array('context' => $coursecontext, 'other' => array('course' => $id, 'forum' => $forum)));
     $event->trigger();
 
+    raise_memory_limit(MEMORY_HUGE);
+
     $forum_detail = report_forumkeywords_get_forum_detail($forum);
     if (trim($forum_detail->intro) != "") {
       $forum_intro .= html_writer::tag('h3', get_string('forumintro', 'forum'));
-      $forum_intro .= html_writer::tag('div', $forum_detail->intro, array('class'=>'alert alert-info', 'id'=>'forum-intro'));
+      $forum_intro .= html_writer::tag('div', format_module_intro('forum', $forum_detail, $cm->id), array('class'=>'alert alert-info', 'id'=>'forum-intro'));
     }
     
     $messages = report_forumkeywords_get_forum_posts($forum);
@@ -105,7 +110,8 @@ if ($forum !== 0) {
         // Strip HTML from all messages and merge them into single string
         $all_messages = '';
         foreach ($messages as $pid => $m) {
-            $all_messages .= "\n".str_replace("&nbsp;", "", strip_tags($m->message));
+            $message_plain = html_to_text(format_text($m->message, $m->messageformat), 0, false);
+            $all_messages .= "\n".str_replace("&nbsp;", "", $message_plain);
         }
         
         $minwords = 50; // default minimum words
@@ -121,7 +127,7 @@ if ($forum !== 0) {
             JiebaAnalyse::init();
             $top_k = 20;
             
-            $stop_words_path = "C:\\Bitnami\\moodle-3.6.0-0\\apps\\moodle\\htdocs\\report\\forumkeywords\\jieba-php\\dict\\stop_words.txt";
+            $stop_words_path = "jieba-php/dict/stop_words.txt";
             $stop_words = fopen($stop_words_path, "r");
             
             JiebaAnalyse::setStopWords($stop_words_path);
@@ -141,7 +147,7 @@ if ($forum !== 0) {
             $word_freq = array();
             foreach ($tags as $word => $freq) {
                 $word_freq[] = array("text"=>$word, "size"=>round($freq*100));
-                $search_link = html_writer::tag('a', $word, array('href'=>$CFG->wwwroot.'/mod/forum/search.php?id='.$id.'&search='.$word, 'target'=>'_blank', 'title'=>$word));
+                $search_link = html_writer::tag('a', $word, array('href'=>$CFG->wwwroot.'/mod/forum/search.php?id='.$id.'&forumid='.$forum.'&search='.$word, 'target'=>'_blank', 'title'=>$word));
                 $tfidf_table->data[] = array($search_link, round($freq, 2));
             }
             
@@ -151,6 +157,7 @@ if ($forum !== 0) {
             // Pass the words array to generate the word cloud
             $params[] = $word_freq;
             $params[] = $id;
+            $params[] = $forum;
             $PAGE->requires->js_call_amd('report_forumkeywords/manage', 'init', $params);
         } else {
             $wordcloud_content = html_writer::tag('h3', get_string('lessthanminwords', 'report_forumkeywords'));
