@@ -17,7 +17,7 @@ The word cloud display make use of d3-cloud (https://github.com/jasondavies/d3-c
 
 ## Installation
 
-Copy the forumkeywords folder into your /report directory and visit your Admin Notification page to complete the installation. It will appear in the Reports folder under Course Administration.
+Unzip and copy the forumkeywords folder into your /report directory and visit your Admin Notification page to complete the installation. It will appear in the Reports folder under Course Administration.
 
 ## Author
 

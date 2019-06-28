@@ -167,6 +167,7 @@ if ($forum !== 0) {
 
 // Display everything to the user.
 echo $OUTPUT->header();
+echo $OUTPUT->heading_with_help(get_string('forumkeywords', 'report_forumkeywords'), 'forumkeywords', 'report_forumkeywords');
 echo $button_content;
 echo $forum_intro;
 echo $wordcloud_content;

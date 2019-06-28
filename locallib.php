@@ -96,35 +96,50 @@ function report_forumkeywords_output_action_buttons($id, $forum, $pos, $words, $
         $html_pos_special .= '<input class="form-check-input" type="checkbox" name="posspecial[]" id="pos_'.$p.'" value="'.$p.'"'.$checked[$p].' /><label for="pos_'.$p.'">'.get_string('pos:'.$p, 'report_forumkeywords').'</label>';
     }
     
+    $html_row_start = '<div class="forum-group row">'."\n".'<div class="col-sm-12">'."\n";
+    $html_row_end = '</div>'."\n".'</div>'."\n";
+    
     $html = '<form class="forumselectform" action="index.php" method="post">'."\n";
-    $html .= '<input type="hidden" name="id" value="'.$id.'" />'."\n";
-    // Forum select
-    $html .= '<div class="form-check form-check-inline">'."\n";
-    $html .= html_writer::label(get_string('forumsincourse', 'report_forumkeywords'), 'menuforum', false, array('class' => 'form-check-label'))." \n";
-    $html .= html_writer::select($forums, 'forum', $forum);
-    $html .= '</div>'."\n";
-    // POS (content words) checkboxes
-    $html .= '<div class="form-check form-check-inline">'."\n";
-    $html .= html_writer::label(get_string('allowposcontent', 'report_forumkeywords'), 'checkboxposcontent', false, array('class' => 'form-check-label'))." \n";
-    $html .= $html_pos_content;
-    $html .= '</div>'."\n";
-    // POS (function words) checkboxes
-    $html .= '<div class="form-check form-check-inline">'."\n";
-    $html .= html_writer::label(get_string('allowposfunction', 'report_forumkeywords'), 'checkboxposfunction', false, array('class' => 'form-check-label'))." \n";
-    $html .= $html_pos_function;
-    $html .= '</div>'."\n";
-    // POS (special) checkboxes
-    $html .= '<div class="form-check form-check-inline">'."\n";
-    $html .= html_writer::label(get_string('allowposspecial', 'report_forumkeywords'), 'checkboxposspecial', false, array('class' => 'form-check-label'))." \n";
-    $html .= $html_pos_special;
-    $html .= '</div>'."\n";
-    // Filter words
-    $html .= '<div class="form-inline">'."\n";
-    $html .= html_writer::label(get_string('filterwords', 'report_forumkeywords'), 'textfilterwords')." \n";
-    $html .= '<input type="text" id="filterwords" name="filterwords" value="'.$words.'" />';
-    $html .= '</div>'."\n";
-    $html .= '<input type="submit" value="'.get_string('extractkeywords', 'report_forumkeywords').'" class="btn btn-primary"/>';
-    $html .= "\n</form>\n";
+        $html .= '<input type="hidden" name="id" value="'.$id.'" />'."\n";
+        // Forum select
+        $html .= $html_row_start;
+            $html .= '<div class="form-check form-check-inline">'."\n";
+            $html .= html_writer::label(get_string('forumsincourse', 'report_forumkeywords'), 'menuforum', false, array('class' => 'form-check-label'))." \n";
+            $html .= html_writer::select($forums, 'forum', $forum);
+            $html .= '</div>'."\n";
+        $html .= $html_row_end;
+        // POS (content words) checkboxes
+        $html .= $html_row_start;
+            $html .= '<div class="form-check form-check-inline">'."\n";
+            $html .= html_writer::label(get_string('allowposcontent', 'report_forumkeywords'), 'checkboxposcontent', false, array('class' => 'form-check-label'))." \n";
+            $html .= $html_pos_content;
+            $html .= '</div>'."\n";
+        $html .= $html_row_end;
+        // POS (function words) checkboxes
+        $html .= $html_row_start;
+            $html .= '<div class="form-check form-check-inline">'."\n";
+            $html .= html_writer::label(get_string('allowposfunction', 'report_forumkeywords'), 'checkboxposfunction', false, array('class' => 'form-check-label'))." \n";
+            $html .= $html_pos_function;
+            $html .= '</div>'."\n";
+        $html .= $html_row_end;
+        // POS (special) checkboxes
+        $html .= $html_row_start;
+            $html .= '<div class="form-check form-check-inline">'."\n";
+            $html .= html_writer::label(get_string('allowposspecial', 'report_forumkeywords'), 'checkboxposspecial', false, array('class' => 'form-check-label'))." \n";
+            $html .= $html_pos_special;
+            $html .= '</div>'."\n";
+        $html .= $html_row_end;
+        // Filter words
+        $html .= $html_row_start;
+            $html .= '<div class="form-inline">'."\n";
+            $html .= html_writer::label(get_string('filterwords', 'report_forumkeywords'), 'textfilterwords')." \n";
+            $html .= '<input type="text" id="filterwords" name="filterwords" value="'.$words.'" />';
+            $html .= '</div>'."\n";
+        $html .= $html_row_end;
+        $html .= $html_row_start;
+            $html .= '<input type="submit" value="'.get_string('extractkeywords', 'report_forumkeywords').'" class="btn btn-primary"/>';
+        $html .= $html_row_end;
+    $html .= "</form>\n";
     
     return $html;
 }
