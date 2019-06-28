@@ -10,11 +10,9 @@ The keywords extraction make use of jieba-php (https://github.com/fukuball/jieba
 
 The word cloud display make use of d3-cloud (https://github.com/jasondavies/d3-cloud) and D3.js (http://d3js.org/).
 
-The PNG image download feature make use of the JavaScript base64 code from Web Toolkit (http://www.webtoolkit.info/javascript-base64.html).
-
 ## Requirements
 
-- Moodle 3.4 (build 2017111300 or later), older versions may work but is not tested.
+- Moodle 3.4+ (build 2017111300 or later), older versions may work but is not tested.
 - Latest version of web browsers are recommended as most feature is rely on JavaScript.
 
 ## Installation

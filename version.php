@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2019041801;
+$plugin->version   = 2019062800;
 $plugin->requires  = 2017111300;
 $plugin->component = 'report_forumkeywords';
 $plugin->maturity  = MATURITY_BETA;
-$plugin->release   = 'v3.6.3';
+$plugin->release   = 'v3.7.0';
